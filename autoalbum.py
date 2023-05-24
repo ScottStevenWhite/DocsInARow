@@ -1,4 +1,6 @@
 import os
+import shutil
+from datetime import datetime
 from PIL import Image
 import pytesseract
 import openai
@@ -100,6 +102,24 @@ def generate_filename(text, api_key):
         
     return filename
 
+def move_file_to_date_dir(filename, base_dir='E:\\Documents\\by-year'):
+    """Move file to date-specific directory in Documents"""
+    
+    # Get current date
+    now = datetime.now()
+
+    # Format date as Year/Month
+    date_dir = os.path.join(base_dir, now.strftime('%Y\\%B'))
+
+    # Create directory if it doesn't exist
+    if not os.path.exists(date_dir):
+        os.makedirs(date_dir)
+
+    # Move the file to the new directory
+    shutil.move(filename, date_dir)
+
+    print(f"Moved {filename} to {date_dir}")
+
 
 def has_more_than_25_words(string):
     """Check if string has more than 25 words"""
@@ -133,6 +153,10 @@ def main(skip_prompt=False):
                 new_filename = generate_filename(corrected_text, openai.api_key)
                 os.rename(img_file, os.path.join(pictures_dir, new_filename))
                 print(f"Renamed {img_file} to {new_filename}")
+
+                # Move the file to the appropriate date directory in Documents
+                new_path = os.path.join(pictures_dir, new_filename)
+                move_file_to_date_dir(new_path)
 
             else:
                 print("Google Vision")
