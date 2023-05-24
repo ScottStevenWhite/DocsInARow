@@ -9,7 +9,7 @@ from src import text_processing
 load_dotenv()
 
 TEST_API_KEY = os.getenv("OPENAI_API_KEY")
-TEST_IMAGE_PATH = os.path.join(os.path.dirname(__file__), 'test_image.jpg')
+TEST_IMAGE_PATH = os.path.join('.', 'test_images', 'test_image.jpg')
 
 def test_extract_text():
     result = text_processing.extract_text(TEST_IMAGE_PATH)
