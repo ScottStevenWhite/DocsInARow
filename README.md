@@ -1,5 +1,7 @@
 # DocsInARow: A Document and Image Categorization Tool
 
+<img src="logo.png" alt="Logo" width="200" height="200">
+
 DocsInARow is a Python application for scanning and analyzing images or documents. The tool is designed to read and interpret the text contained in scanned documents and categorize the document type using the GPT-3 model provided by OpenAI. For images, it uses Google Vision to detect labels and categories.
 
 ## Features
