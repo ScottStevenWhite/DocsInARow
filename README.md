@@ -43,7 +43,7 @@ DocsInARow is a Python application for scanning and analyzing images or document
 6. Run the script:
 
     ```bash
-    python main.py
+    python ./src/main.py
     ```
 
 ## Supported File Formats
@@ -76,14 +76,15 @@ Please also be aware of the usage costs associated with the OpenAI API and Googl
 The DocsInARow project follows a specific structure to organize its code and resources. Here's an overview of the project structure:
 
 ```
-DocsInARow/   
+DocsInARow/
+├── src/
+│   └── main.py
+│   └── image_processing.py
+│   └── test_text_processing.py
+│   └── config.py 
 ├── tests/
 │   └── test_text_processing.py
 |   └── test_image.jpg
-├── config.py
-├── image_processing.py
-├── main.py
-├── text_processing.py
 ├── .env
 └── README.md
 ```
