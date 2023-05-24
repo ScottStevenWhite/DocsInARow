@@ -6,3 +6,4 @@ config.json
 
 # Ignore all files in the 'keys' directory (replace 'keys' with your actual directory name)
 keys/
+__pycache__/
