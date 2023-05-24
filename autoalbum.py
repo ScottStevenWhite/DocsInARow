@@ -8,6 +8,7 @@ import piexif
 from google.cloud import vision
 import logging
 import argparse
+import re
 
 def load_config():
     """Load configuration from JSON file"""
@@ -74,6 +75,32 @@ def categorize_document(text, api_key):
     )
     return response.choices[0].text.strip()
 
+def generate_filename(text, api_key):
+    """Generate a meaningful filename using OpenAI"""
+    openai.api_key = api_key
+    response = openai.Completion.create(
+        engine="text-davinci-003",
+        prompt=f"The following is a document snippet: {text[:2048]}. Please generate a meaningful filename for this document. It may be anywhere between one to five words, but words must be seperated via underscores and all files should end with .jpg For example 2023_W2.jpg: ",
+        temperature=0.3,
+        max_tokens=100
+    )
+
+    # Clean up the output
+    output = response.choices[0].text.strip()
+
+    # Search for the filename pattern in the output
+    filename = re.search(r'\b[\w_]+\.jpg\b', output)
+
+    if filename is not None:
+        # Extract the match
+        filename = filename.group()
+    else:
+        # If no match, return a default filename
+        filename = "default_filename.jpg"
+        
+    return filename
+
+
 def has_more_than_25_words(string):
     """Check if string has more than 25 words"""
     return len(string.split()) > 25
@@ -101,6 +128,12 @@ def main(skip_prompt=False):
                 add_text_to_metadata(img_file, corrected_text)
                 print("------------------ Category ------------------")
                 print(categorize_document(corrected_text, openai.api_key))
+
+                # Generate filename and rename the file
+                new_filename = generate_filename(corrected_text, openai.api_key)
+                os.rename(img_file, os.path.join(pictures_dir, new_filename))
+                print(f"Renamed {img_file} to {new_filename}")
+
             else:
                 print("Google Vision")
                 labels = detect_labels(img_file)
