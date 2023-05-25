@@ -28,19 +28,11 @@ This document outlines upcoming features and enhancements for DocsInARow.
 
 ### New Features
 
-1. **Paid Version**: Develop a user-friendly, subscription-based version of DocsInARow which simplifies setup through a graphical user interface (GUI), automates API key configuration, and provides enhanced features through a cloud-backed infrastructure.
+1. **Local Data Encryption**: Implement encryption for the locally stored data to protect against unauthorized access.
 
-2. **Document Organization Flexibility**: Add the ability for users to customize their document organization method based on their preference.
+2. **Secure Data Transmission**: Ensure that all data transmitted over networks is properly encrypted to prevent data leaks during transmission.
 
-3. **Integration with External APIs**: Allow users to connect with third-party services, such as billing or project management software, for easy sharing and collaboration.
-
-4. **Accessibility Features**: Implement features that make the application more accessible to people with disabilities.
-
-### Enhancements
-
-1. **Performance Optimizations**: Optimize the application for better performance when processing large documents or large batches of documents.
-
-2. **Enhanced Security Measures**: Increase security measures to protect user data, especially for the subscription-based version.
+3. **PII Scrubber**: Develop a local processing tool to identify and scrub out personally identifiable information (PII) from documents before they are processed by cloud-based services. This tool would be able to recognize and remove common types of PII like names, addresses, social security numbers, etc.
 
 ## Version 0.4.0 (Q1 2024)
 
@@ -58,4 +50,37 @@ This document outlines upcoming features and enhancements for DocsInARow.
 
 1. **UI/UX Improvements**: Implement improvements to the user interface and overall user experience.
 
+2. **Secure Cloud Storage Integration**: Integrate with cloud storage services in a secure manner, ensuring data is encrypted before it is uploaded, and access control policies are robust.
+
+## Version 0.5.0 (Q2 2024)
+
+### New Features
+
+1. **Data Anonymization and Pseudonymization**: Implement data anonymization and pseudonymization features to prevent personal data from being visible in processed data.
+
+2. **Security Audit and Compliance Features**: Introduce features to facilitate security auditing and compliance with privacy laws and guidelines.
+
+## Enhancements
+
+3. **Improved Access Controls**: Enhance user management features and access controls to ensure only authorized users have access to the appropriate data.
+
+
 Please note, this roadmap is subject to changes. New ideas and contributions are always welcome!
+
+## Version 1.0.0 (Q4 2023)
+
+### New Features
+
+1. **Paid Version**: Develop a user-friendly, subscription-based version of DocsInARow which simplifies setup through a graphical user interface (GUI), automates API key configuration, and provides enhanced features through a cloud-backed infrastructure.
+
+2. **Document Organization Flexibility**: Add the ability for users to customize their document organization method based on their preference.
+
+3. **Integration with External APIs**: Allow users to connect with third-party services, such as billing or project management software, for easy sharing and collaboration.
+
+4. **Accessibility Features**: Implement features that make the application more accessible to people with disabilities.
+
+### Enhancements
+
+1. **Performance Optimizations**: Optimize the application for better performance when processing large documents or large batches of documents.
+
+2. **Enhanced Security Measures**: Increase security measures to protect user data, especially for the subscription-based version.
