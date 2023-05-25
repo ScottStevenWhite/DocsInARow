@@ -67,7 +67,7 @@ This document outlines upcoming features and enhancements for DocsInARow.
 
 Please note, this roadmap is subject to changes. New ideas and contributions are always welcome!
 
-## Version 1.0.0 (Q4 2023)
+## Version 1.0.0 (Q3 2024)
 
 ### New Features
 
@@ -84,3 +84,17 @@ Please note, this roadmap is subject to changes. New ideas and contributions are
 1. **Performance Optimizations**: Optimize the application for better performance when processing large documents or large batches of documents.
 
 2. **Enhanced Security Measures**: Increase security measures to protect user data, especially for the subscription-based version.
+
+## Paid Verion Considerations
+
+1. **Privacy Policy**: Develop a comprehensive privacy policy that explains exactly what data we collect, how it is used, and how it is protected. Make sure that this policy is easily accessible and that all users must agree to it before using the service.
+
+2. **Terms of Service**: Include terms of service with an explicit statement that while every effort is made to protect personal data and scrub PII, there is always a non-zero risk of a data leak, and users must accept this risk to use the service.
+
+3. **Data Processing Agreement**: To operate in the European Union, we need a Data Processing Agreement under the GDPR. It will outline what data we process, why we process it, how we protect it, and what our responsibilities are in case of a breach.
+
+4. **Transparency**: Be clear and transparent about our data handling practices. If we have a data breach, we will let affected users know as soon as possible and take immediate steps to mitigate the damage.
+
+5. **Limit the Data You Collect**: The best way to protect personal data is to not collect it at all. We will only collect the data we absolutely need and anonymize or delete it as soon as we no longer need it.
+
+6. **Insurance**: Cyber liability insurance, which can help cover costs if a data breach does occur.
