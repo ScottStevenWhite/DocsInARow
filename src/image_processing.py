@@ -3,8 +3,6 @@ import json
 import logging
 from PIL import Image
 import piexif
-from datetime import datetime
-import shutil
 
 def get_image_files(pictures_dir):
     """Get image files from the specified directory"""
@@ -32,20 +30,3 @@ def add_text_to_metadata(image_path, text):
     exif_bytes = piexif.dump(exif_dict)
     im.save(image_path, exif=exif_bytes)
 
-def move_file_to_date_dir(filename, base_dir='E:\\Documents\\by-year'):
-    """Move file to date-specific directory in Documents"""
-    
-    # Get current date
-    now = datetime.now()
-
-    # Format date as Year/Month
-    date_dir = os.path.join(base_dir, now.strftime('%Y\\%B'))
-
-    # Create directory if it doesn't exist
-    if not os.path.exists(date_dir):
-        os.makedirs(date_dir)
-
-    # Move the file to the new directory
-    shutil.move(filename, date_dir)
-
-    print(f"Moved {filename} to {date_dir}")

@@ -2,8 +2,9 @@ import os
 import logging
 import argparse
 from config import set_config
-from image_processing import get_image_files, add_text_to_metadata, move_file_to_date_dir
+from image_processing import get_image_files, add_text_to_metadata
 from text_processing import extract_text, has_more_than_25_words, correct_text, categorize_document, generate_filename, detect_labels
+from utils import get_windows_pictures_folder, move_file_to_date_dir
 
 def process_image_file(img_file, api_key, pictures_dir):
     """Process individual image file"""
@@ -37,13 +38,20 @@ def process_image_file(img_file, api_key, pictures_dir):
 def main(skip_prompt=False):
     logging.info("Starting program")
     logging.basicConfig(level=logging.INFO)
+
     config = set_config()
     if config is None:
         return
-    pictures_dir = config["pictures_dir"]
+    
+    if os.name == 'nt':
+        pictures_dir = get_windows_pictures_folder()
+    else:
+        pictures_dir = os.path.expanduser('~/Pictures')
+
     img_files = get_image_files(pictures_dir)
     if not img_files:
         return
+    
     for img_file in img_files:
         process_image_file(img_file, config["openai_api_key"], pictures_dir)
         # Ask user to continue or quit
