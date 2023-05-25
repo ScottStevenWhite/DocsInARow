@@ -52,6 +52,8 @@ This document outlines upcoming features and enhancements for DocsInARow.
 
 3. **Bulk Processing**: Add a feature to process multiple images at once, without asking for confirmation after each image.
 
+4. **Integrate into AI assistant tools** to allow AI assistants to know and understand the documents relevant to your life to better assist you in your day to day
+
 ### Enhancements
 
 1. **UI/UX Improvements**: Implement improvements to the user interface and overall user experience.
