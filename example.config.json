@@ -1,6 +1,0 @@
-{
-    "google_application_credentials": "<Path to your Google Application Credentials>",
-    "openai_api_key": "<Your OpenAI API Key>",
-    "tesseract_cmd": "<Path to your Tesseract executable>",
-    "pictures_dir": "<Path to your pictures directory>"
-}

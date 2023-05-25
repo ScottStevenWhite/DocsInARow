@@ -91,7 +91,7 @@ DocsInARow/
 
 ## Brief Explanation of Each Python File
 
-* `config.py`: Handles loading and setting configuration parameters for the application. It loads configuration from the config.json file and sets environment variables required by other modules.
+* `config.py`: Handles loading and setting configuration parameters for the application. It loads configuration from the .env file and sets environment variables required by other modules.
 
 * `image_processing.py`: Contains functions for image-related processing tasks. It retrieves image files from a specified directory, adds text to image metadata, and moves files to date-specific directories for organizing the processed images.
 

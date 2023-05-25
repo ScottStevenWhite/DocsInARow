@@ -1,36 +1,47 @@
 import os
-import json
 import logging
 from dotenv import load_dotenv
 import pytesseract
 import openai
 
-load_dotenv()
-
-def load_config():
-    """Load configuration from JSON file"""
-    try:
-        logging.info("Loading configuration from config.json")
-        with open('config.json') as config_file:
-            config = json.load(config_file)
-        logging.info("Successfully loaded configuration")
-        return config
-    except (FileNotFoundError, IOError) as e:
-        logging.error(f"Error reading config file: {e}")
-        return None
-    except json.JSONDecodeError as e:
-        logging.error(f"Error parsing config file: {e}")
-        return None
-
 def set_config():
     """Load configuration and set environment variables"""
     load_dotenv()
-    config = load_config()
-    if config is None:
-        return None
 
-    logging.info("Setting environment variables and configuration parameters")
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
-    openai.api_key = os.getenv("OPENAI_API_KEY")
-    pytesseract.pytesseract.tesseract_cmd = os.getenv("TESSERACT_CMD")
-    return config
+    logging.info("Loading environment variables and configuration parameters")
+
+    # Validate and set environment variables
+    try:
+        openai_api_key = os.getenv("OPENAI_API_KEY")
+        google_application_credentials = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+        tesseract_cmd = os.getenv("TESSERACT_CMD")
+
+        if not openai_api_key:
+            raise ValueError("OPENAI_API_KEY environment variable not set")
+
+        if not google_application_credentials:
+            raise ValueError("GOOGLE_APPLICATION_CREDENTIALS environment variable not set")
+
+        if not tesseract_cmd:
+            raise ValueError("TESSERACT_CMD environment variable not set")
+
+        # Set pytesseract command
+        pytesseract.pytesseract.tesseract_cmd = tesseract_cmd
+        # Set openai api key
+        openai.api_key = openai_api_key
+        # Set Google application credentials
+        os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = google_application_credentials
+
+        config = {
+            "openai_api_key": openai_api_key,
+            "google_application_credentials": google_application_credentials,
+            "tesseract_cmd": tesseract_cmd
+        }
+
+        logging.info("Environment variables and configuration parameters set successfully")
+
+        return config
+
+    except ValueError as e:
+        logging.error(e)
+        return None

@@ -5,6 +5,30 @@ from config import set_config
 from image_processing import get_image_files, add_text_to_metadata
 from text_processing import extract_text, has_more_than_25_words, correct_text, categorize_document, generate_filename, detect_labels
 from utils import get_windows_pictures_folder, move_file_to_date_dir
+from shutil import move
+
+def handle_text_file(img_file, api_key, pictures_dir):
+    text = extract_text(img_file)
+    corrected_text = correct_text(text)
+    logging.info("------------------ Text after correction ------------------")
+    logging.info(corrected_text)
+    add_text_to_metadata(img_file, corrected_text)
+    logging.info("------------------ Category ------------------")
+    logging.info(categorize_document(corrected_text))
+
+    # Generate filename and rename the file
+    new_filename = generate_filename(corrected_text)
+    new_path = os.path.join(pictures_dir, new_filename)
+    move(img_file, new_path)
+    logging.info(f"Renamed {img_file} to {new_filename}")
+
+    # Move the file to the appropriate date directory in Documents
+    move_file_to_date_dir(new_path)
+
+def handle_image_file(img_file):
+    logging.info("Google Vision")
+    labels = detect_labels(img_file)
+    logging.info(labels)
 
 def process_image_file(img_file, api_key, pictures_dir):
     """Process individual image file"""
@@ -12,32 +36,15 @@ def process_image_file(img_file, api_key, pictures_dir):
     try:
         text = extract_text(img_file)
         if has_more_than_25_words(text):
-            corrected_text = correct_text(text, api_key)
-            print("------------------ Text after correction ------------------")
-            print(corrected_text)
-            add_text_to_metadata(img_file, corrected_text)
-            print("------------------ Category ------------------")
-            print(categorize_document(corrected_text, api_key))
-
-            # Generate filename and rename the file
-            new_filename = generate_filename(corrected_text, api_key)
-            os.rename(img_file, os.path.join(pictures_dir, new_filename))
-            print(f"Renamed {img_file} to {new_filename}")
-
-            # Move the file to the appropriate date directory in Documents
-            new_path = os.path.join(pictures_dir, new_filename)
-            move_file_to_date_dir(new_path)
-
+            handle_text_file(img_file, api_key, pictures_dir)
         else:
-            print("Google Vision")
-            labels = detect_labels(img_file)
-            print(labels)
+            handle_image_file(img_file)
     except Exception as e:
-        logging.error(f"Error processing {img_file}: {e}")
+        logging.exception(f"Error processing {img_file}")
 
 def main(skip_prompt=False):
-    logging.info("Starting program")
     logging.basicConfig(level=logging.INFO)
+    logging.info("Starting program")
 
     config = set_config()
     if config is None:
