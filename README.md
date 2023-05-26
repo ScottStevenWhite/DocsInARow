@@ -19,7 +19,7 @@ DocsInARow is a Python application for scanning and analyzing images or document
 2. Install necessary dependencies with pip:
 
    ```bash
-   pip install pytesseract openai google-cloud-vision piexif
+   pip install .
     ```
 
 3. Set up Tesseract-OCR on your system and update the path in the script:
@@ -63,6 +63,17 @@ For each image:
 If the image contains more than 25 words, it is considered a document. The script extracts the text, corrects it using GPT-3, and prints out the corrected text. It also categorizes the document using GPT-3 and adds the corrected text to the image's metadata.
 If the image contains less than 25 words, it is considered a picture. The script uses Google Vision to detect labels and prints them out.
 After each image, the script asks whether you want to continue to the next image. You can type 'Y' to continue or 'N' to stop the script.
+
+## Building the Project
+
+This project uses PyInstaller to compile the Python scripts into a standalone executable. To build the project, you can use the following command:
+
+```bash
+pyinstaller --onefile .\src\main.py
+```
+
+This will create a single executable file from the main.py script located in the src directory. The executable will be placed in the dist directory.
+
 
 ## Notes
 

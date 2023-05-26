@@ -27,5 +27,6 @@ setup(
         "google-cloud-core",
         "google-cloud-vision",
         "piexif",
+        "pyinstaller",
     ],
 )
