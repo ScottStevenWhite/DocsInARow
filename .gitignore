@@ -21,3 +21,5 @@ keys/*
 .DS_Store
 .vscode/
 .idea/
+main.spec
+dist/

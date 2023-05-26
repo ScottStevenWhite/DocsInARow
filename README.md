@@ -34,11 +34,10 @@ DocsInARow is a Python application for scanning and analyzing images or document
     openai.api_key = 'your-openai-api-key'
     os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "your-google-cloud-vision-key.json"
     ```
-5. Place your images in the Pictures directory or change the pictures_dir variable to your preferred directory:
-
+5. Place your images in the Pictures directory. Currently, images need to start with img and end with .jpg. Example:
     ```python
-    pictures_dir = "E:\\Pictures"
-    ```
+     imgXXX.jpg
+     ```
 
 6. Run the script:
 
@@ -77,21 +76,29 @@ The DocsInARow project follows a specific structure to organize its code and res
 
 ```
 DocsInARow/
-├── src/
-│   └── main.py
-│   └── image_processing.py
-│   └── test_text_processing.py
-│   └── config.py 
-├── tests/
-│   └── test_text_processing.py
-|   └── test_image.jpg
-├── .env
-└── README.md
+├───.env
+├───.gitignore
+├───.pre-commit-config.yaml
+├───logo.png
+├───README.md
+├───ROADMAP.md
+├───setup.py
+├───src
+│   ├───config.py
+│   ├───image_processing.py
+│   ├───main.py
+│   ├───text_processing.py
+│   └───utils.py
+├───tests
+│   ├───test_image_processing.py
+│   └───test_text_processing.py
+└────test_images
+    └───test_image.jpg
 ```
 
 ## Brief Explanation of Each Python File
 
-* `config.py`: Handles loading and setting configuration parameters for the application. It loads configuration from the .env file and sets environment variables required by other modules.
+* `config.py`: This module is responsible for loading environment variables and setting up configuration for the application from a .env file. It sets up and validates necessary environment variables for other modules. If a required environment variable is missing, an error is raised.
 
 * `image_processing.py`: Contains functions for image-related processing tasks. It retrieves image files from a specified directory, adds text to image metadata, and moves files to date-specific directories for organizing the processed images.
 
@@ -100,6 +107,17 @@ DocsInARow/
 * `text_processing.py`: Provides functions for text-related processing tasks. It includes functions to extract text from images using OCR, correct text using OpenAI's GPT-3 model, categorize documents using GPT-3, and generate meaningful filenames.
 
 * `tests/test_text_processing.py`: Contains unit tests for the functions in `text_processing.py`. It ensures that the text processing functions are working as expected.
+
+* `utils.py`: This file provides utility functions for your application. Here's a breakdown of what each function does:
+
+   - `get_windows_folder(CSIDL_FOLDER)`: Retrieves the current path of a Windows special folder (like 'My Documents', 'My Pictures', etc.) by its `CSIDL` value.
+
+   - `get_windows_documents_folder()`: Uses the `get_windows_folder()` function to get the current path of the 'My Documents' folder in Windows.
+
+   - `get_windows_pictures_folder()`: Uses the `get_windows_folder()` function to get the current path of the 'My Pictures' folder in Windows.
+
+   - `move_file_to_date_dir(filename, base_dir=None)`: Moves a given file to a date-specific directory in the 'Documents' folder. If the 'Documents' folder isn't specified, it defaults to the 'My Documents' folder in Windows, or the '~/Documents' folder in non-Windows systems. The date-specific directory is formatted as 'Year/Month'. If either the base directory or date-specific directory doesn't exist, they are created.
+
 
 ## Contribution
 

@@ -1,4 +1,4 @@
-from setuptools import setup, find_packages
+from setuptools import find_packages, setup
 
 setup(
     name="DocsInARow",
@@ -24,7 +24,8 @@ setup(
         "Pillow",
         "pytesseract",
         "python-dotenv",
+        "google-cloud-core",
         "google-cloud-vision",
-        "piexif"
+        "piexif",
     ],
 )
