@@ -4,6 +4,7 @@ from PIL import Image
 import piexif
 from datetime import datetime
 import sys
+
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from src import image_processing
 
@@ -12,6 +13,7 @@ TEST_IMAGE_DIR = "test_images"
 TEST_IMAGE_PATHS = [
     os.path.join(TEST_IMAGE_DIR, "test_image.jpg"),
 ]
+
 
 def test_add_text_to_metadata(tmpdir):
     # Create a temporary image file for testing
@@ -29,5 +31,3 @@ def test_add_text_to_metadata(tmpdir):
 
     # Check if the user comment matches the expected text
     assert user_comment == text
-
-

@@ -26,7 +26,10 @@ setup(
         "python-dotenv",
         "google-cloud-core",
         "google-cloud-vision",
+        "google-cloud-documentai",
         "piexif",
         "pyinstaller",
+        "scikit-learn",
+        "opencv-python",
     ],
 )

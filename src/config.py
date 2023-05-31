@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 import pytesseract
 import openai
 
+
 def set_config():
     """Load configuration and set environment variables"""
     load_dotenv()
@@ -20,7 +21,9 @@ def set_config():
             raise ValueError("OPENAI_API_KEY environment variable not set")
 
         if not google_application_credentials:
-            raise ValueError("GOOGLE_APPLICATION_CREDENTIALS environment variable not set")
+            raise ValueError(
+                "GOOGLE_APPLICATION_CREDENTIALS environment variable not set"
+            )
 
         if not tesseract_cmd:
             raise ValueError("TESSERACT_CMD environment variable not set")
@@ -35,10 +38,12 @@ def set_config():
         config = {
             "openai_api_key": openai_api_key,
             "google_application_credentials": google_application_credentials,
-            "tesseract_cmd": tesseract_cmd
+            "tesseract_cmd": tesseract_cmd,
         }
 
-        logging.info("Environment variables and configuration parameters set successfully")
+        logging.info(
+            "Environment variables and configuration parameters set successfully"
+        )
 
         return config
 
